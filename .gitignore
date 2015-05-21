@@ -1,0 +1,9 @@
+/*
+/*/
+
+!/.gitignore
+!/pom.xml
+!/libs/
+!/LICENSE.md
+!/README.md
+!/src/
