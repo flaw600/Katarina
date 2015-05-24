@@ -62,9 +62,12 @@ public final class Katarina{
     public static void main(String... args){
         IRCProfile profile = injector.getInstance(IRCProfile.class);
         try(IRCConnection connection = injector.getInstance(IRCConnection.class)){
+            System.out.println("Connecting To Server");
             connection.connect(profile);
+            System.out.println("Done Connecting");
             connection.EVENT_BUS.register(new CommandHandler());
             Thread.sleep(TimeUnit.SECONDS.toMillis(10));
+            System.out.println("Joining Channels");
             connection.join("#iWin");
             connection.join("#SpeakEasy");
             while(connection.isConnected()){/* Fallthrough */}
