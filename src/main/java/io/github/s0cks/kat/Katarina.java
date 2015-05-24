@@ -66,6 +66,7 @@ public final class Katarina{
             connection.EVENT_BUS.register(new CommandHandler());
             Thread.sleep(TimeUnit.SECONDS.toMillis(10));
             connection.join("#iWin");
+            connection.join("#SpeakEasy");
             while(connection.isConnected()){/* Fallthrough */}
         } catch(Exception e){
             throw new RuntimeException(e);
