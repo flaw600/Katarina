@@ -59,7 +59,7 @@ public final class Katarina{
         }
     }
 
-    public static void main(String... args){
+    public static void main(String[] args){
         IRCProfile profile = injector.getInstance(IRCProfile.class);
         try(IRCConnection connection = injector.getInstance(IRCConnection.class)){
             System.out.println("Connecting To Server");
@@ -69,10 +69,12 @@ public final class Katarina{
             Thread.sleep(TimeUnit.SECONDS.toMillis(10));
             System.out.println("Joining Channels");
             connection.join("#iWin");
+            System.out.println("Joined channel #iWin"); //added for consistency and logging purposes
             connection.join("#SpeakEasy");
+            System.out.println("Joined channel #SpeakEasy"); //added for consistency and logging purposes TODO: create if variable for this?
             while(connection.isConnected()){/* Fallthrough */}
         } catch(Exception e){
-            throw new RuntimeException(e);
+            throw new RuntimeException(e); //this gonna be changed?
         }
     }
 }
