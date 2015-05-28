@@ -60,6 +60,8 @@ public final class Katarina{
     }
 
     public static void main(String[] args){
+    	boolean iWinConnected = false;
+    	boolean speakEasyConnecte = false;
         IRCProfile profile = injector.getInstance(IRCProfile.class);
         try(IRCConnection connection = injector.getInstance(IRCConnection.class)){
             System.out.println("Connecting To Server");
@@ -69,9 +71,17 @@ public final class Katarina{
             Thread.sleep(TimeUnit.SECONDS.toMillis(10));
             System.out.println("Joining Channels");
             connection.join("#iWin");
-            System.out.println("Joined #iWin"); //logging purposes
+            if (iWinConnected = true) {
+            	System.out.println("Joined #iWin"); //logging purposes
+            } else {
+            	System.out.println("Join to #iWin failed");
+            }
             connection.join("#SpeakEasy");
-            System.out.println("Joined #iWin"); //will need to change to accomodate failure eventually
+            if(iWinConnected = true) {
+            	System.out.println("Joined #SpeakEasy"); //will need to create booleans on demand
+            } else {
+            	System.out.println("Join to #SpeakEasy failed"); //or get error MSG from network/channel
+            }
             while(connection.isConnected()){/* Fallthrough */}
         } catch(Exception e){
             throw new RuntimeException(e); 
