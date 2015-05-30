@@ -25,6 +25,7 @@ implements Closeable {
     private final Socket socket;
     private final int port;
     private final String server;
+    private boolean joined = false;
 
     @Inject
     private IRCConnection(@Named("server") String server, @Named("port") int port){
@@ -36,6 +37,14 @@ implements Closeable {
 
     public boolean isConnected(){
         return this.socket.isConnected();
+    }
+    
+    /*
+     * TODO make sure that isJoined is per channel than assume isJoined resets per channel
+     * TODO verify correct usage of 'this'
+     */
+    public boolean isJoined() {
+    	return this.joined;
     }
 
     public void connect(IRCProfile profile)
@@ -69,6 +78,10 @@ implements Closeable {
 
     public void mode(String channel, String mode){
         this.writeRaw("MODE " + channel + " " + mode);
+    }
+    
+    public void setJoinedState(boolean joinedState) {
+    	this.joined=joinedState;
     }
 
     @Override

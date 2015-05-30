@@ -20,6 +20,17 @@ public class IRCEvent{
             this.channel = channel;
         }
     }
+    
+    public static final class JoinChannelFailedEvent extends IRCEvent {
+    	public final String user;
+        public final String channel;
+
+        public JoinChannelFailedEvent(IRCConnection connection, String user, String channel){
+            super(connection);
+            this.user = user;
+            this.channel = channel;
+        }
+    }
 
     public static final class PartChannelEvent
             extends IRCEvent{

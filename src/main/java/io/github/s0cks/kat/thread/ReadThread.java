@@ -59,7 +59,10 @@ public final class ReadThread
                 if(code == -1){
                     nick = info;
                     target = command;
-                }
+                } else if (code==471 || code==473 || code==474 || code==475) { //join channel failed
+                	//TODO remember to fix once listeners are implemented properly
+                	connection.setJoinedState(false); //made a var to tell if join was successful
+                } else {connection.setJoinedState(true);} //add to later
             }
         }
 
@@ -82,6 +85,8 @@ public final class ReadThread
             this.connection.EVENT_BUS.post(new IRCEvent.PrivateMessageEvent(this.connection, nick, line.substring(line.indexOf(" :") + 2)));
         } else if(command.equals("JOIN")){
             this.connection.EVENT_BUS.post(new IRCEvent.JoinChannelEvent(this.connection, nick, target));
+        } else if (command.equals("471") || command.equals("473") || command.equals("474") || command.equals("475")) {
+        	this.connection.EVENT_BUS.post(new IRCEvent.JoinChannelFailedEvent(this.connection, nick, target)); //made new event to. idk if this was a good idea
         } else if(command.equals("PART")){
             this.connection.EVENT_BUS.post(new IRCEvent.PartChannelEvent(this.connection, nick, target));
         }
