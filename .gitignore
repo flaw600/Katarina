@@ -1,9 +1,6 @@
 /*
 /*/
 
-# Mac junk files
-*.DS_Store
-
 !/.gitignore
 !/pom.xml
 !/libs/
